@@ -5,17 +5,7 @@
 @section('content')
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-500">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm text-gray-500">Rendez-vous aujourd'hui</p>
-                    <h3 class="text-2xl font-bold text-gray-800">{{ $appointmentsToday }}</h3>
-                </div>
-                <div class="p-3 bg-blue-50 rounded-full text-blue-500">
-                    <i data-lucide="calendar"></i>
-                </div>
-            </div>
-        </div>
+     
 
         <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
             <div class="flex items-center justify-between">

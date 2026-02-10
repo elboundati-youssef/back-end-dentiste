@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\AppointmentController;
+
 use App\Http\Controllers\Admin\BlogController; 
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +15,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Rendez-vous
-    Route::get('/admin/appointments', [AppointmentController::class, 'index'])->name('admin.appointments.index');
+
+   
 
     // --- ROUTES BLOG ---
     Route::get('/admin/blogs', [BlogController::class, 'index'])->name('admin.blogs.index');

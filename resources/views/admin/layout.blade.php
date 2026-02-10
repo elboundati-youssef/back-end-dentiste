@@ -26,10 +26,7 @@
                     <span>Tableau de bord</span>
                 </a>
 
-                <a href="{{ route('admin.appointments.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors {{ request()->routeIs('admin.appointments.index') ? 'bg-blue-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-                    <i data-lucide="calendar" class="w-5 h-5"></i>
-                    <span>Rendez-vous</span>
-                </a>
+              
 
                 <a href="{{ route('admin.blogs.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors {{ request()->routeIs('admin.blogs.*') ? 'bg-blue-600 text-white shadow-md' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                     <i data-lucide="file-text" class="w-5 h-5"></i>

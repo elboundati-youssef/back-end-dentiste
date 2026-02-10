@@ -3,22 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Appointment;
-use App\Models\Blog;
-use Carbon\Carbon;
+use App\Models\Blog; // On garde uniquement le modèle Blog
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Compter le nombre total de rendez-vous reçus aujourd'hui
-        $appointmentsToday = Appointment::whereDate('created_at', Carbon::today())->count();
-
-        // Compter le nombre total d'articles de blog
+        // 1. Compter le nombre total d'articles de blog
         $totalBlogs = Blog::count();
 
-        // Envoyer les données à la vue admin/index.blade.php
-        return view('admin.index', compact('appointmentsToday', 'totalBlogs'));
+        // 2. Récupérer les 5 derniers articles (Pour remplir le tableau du dashboard)
+        $latestBlogs = Blog::latest()->take(5)->get();
+
+        // Envoyer les données à la vue
+        // Note : Assure-toi que le nom de ta vue est bien 'admin.index' ou 'dashboard'
+        return view('admin.index', compact('totalBlogs', 'latestBlogs'));
     }
 }
