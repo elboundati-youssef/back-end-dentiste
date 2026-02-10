@@ -1,50 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Admin; // ⚠️ Note le namespace "Admin"
+namespace App\Http\Controllers; // <--- C'est ici que l'erreur se trouvait (c'était écrit \Admin)
 
 use App\Http\Controllers\Controller;
-use App\Models\Blog;
 use Illuminate\Http\Request;
+use App\Models\Blog; 
 
 class BlogController extends Controller
 {
-    // 1. AFFICHER LA LISTE (Pour le Dashboard)
+    // Récupérer tous les articles
     public function index()
     {
-        // On récupère les articles (Models) pour les passer à la vue Blade
         $blogs = Blog::latest()->get();
-        return view('admin.blogs.index', compact('blogs'));
+        return response()->json($blogs);
     }
 
-    // 2. AFFICHER LE FORMULAIRE DE CRÉATION
-    public function create()
+    // Récupérer un article spécifique
+    public function show($id)
     {
-        return view('admin.blogs.create');
-    }
+        $blog = Blog::find($id);
 
-    // 3. ENREGISTRER L'ARTICLE (Depuis le formulaire Admin)
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'content' => 'required',
-            'image' => 'nullable|image|max:2048' // Max 2MB
-        ]);
-
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('blogs', 'public');
+        if (!$blog) {
+            return response()->json(['message' => 'Article introuvable'], 404);
         }
 
-        Blog::create([
-            'title' => $request->title,
-            'category' => $request->category,
-            'content' => $request->content,
-            'image' => $imagePath
-        ]);
-
-        // ⚠️ IMPORTANT : Redirection vers la liste (pas de JSON ici !)
-        return redirect()->route('admin.blogs.index')->with('success', 'Article publié avec succès !');
+        return response()->json($blog);
     }
 }
