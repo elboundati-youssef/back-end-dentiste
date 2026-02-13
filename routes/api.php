@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\NewsletterController;
 
 
 /*
@@ -22,7 +23,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/blogs', [BlogController::class, 'index']);
 Route::get('/blogs/{id}', [BlogController::class, 'show']);
 Route::post('/appointments', [AppointmentController::class, 'store']);
-
+Route::post('/newsletter', [NewsletterController::class, 'subscribe']);
 
 // --- ROUTES PROTÉGÉES (Nécessitent un Token / Admin connecté) ---
 Route::middleware('auth:sanctum')->group(function () {
@@ -36,6 +37,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']); // Supprimer
     Route::put('/appointments/{id}/status', [AppointmentController::class, 'updateStatus']); // Changer statut
     Route::get('/appointments/{id}', [AppointmentController::class, 'show']);
+
+    Route::get('/newsletter', [NewsletterController::class, 'index']);
 
     // Gestion du Blog (Actions Administrateur)
     Route::post('/blogs', [BlogController::class, 'store']);    // Créer
