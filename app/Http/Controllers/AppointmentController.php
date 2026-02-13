@@ -56,4 +56,12 @@ class AppointmentController extends Controller
 
         return response()->json(['message' => 'Statut mis à jour', 'data' => $appointment]);
     }
+
+    /**
+     * Afficher un rendez-vous spécifique
+     */
+    public function show($id)
+    {
+        return Appointment::findOrFail($id);
+    }
 }

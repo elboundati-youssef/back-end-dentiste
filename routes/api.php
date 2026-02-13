@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/appointments', [AppointmentController::class, 'index']); // Voir la liste
     Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']); // Supprimer
     Route::put('/appointments/{id}/status', [AppointmentController::class, 'updateStatus']); // Changer statut
+    Route::get('/appointments/{id}', [AppointmentController::class, 'show']);
 
     // Gestion du Blog (Actions Administrateur)
     Route::post('/blogs', [BlogController::class, 'store']);    // Créer
