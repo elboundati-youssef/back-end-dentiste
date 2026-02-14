@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\NewsletterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome'); // Ou return "API is running";
 });
+Route::get('/news', [NewsletterController::class, 'send']);

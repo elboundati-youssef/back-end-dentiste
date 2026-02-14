@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\NewsletterSubscriber;
+use App\Jobs\SendNewsletterJob;
 
 class NewsletterController extends Controller
 {
@@ -34,4 +35,19 @@ class NewsletterController extends Controller
     // Retourne la liste complète des abonnés (triés par le plus récent)
     return response()->json(NewsletterSubscriber::orderBy('created_at', 'desc')->get());
 }
+public function send(Request $request)
+    {
+        // 1. On valide que le message n'est pas vide
+        $request->validate([
+            'content' => 'required|string'
+        ]);
+
+        // 2. On RÉCUPÈRE le message envoyé depuis le Dashboard (React)
+        $content = $request->input('content'); 
+        
+        // 3. On envoie ce message spécifique au Job
+        SendNewsletterJob::dispatch($content);
+
+        return response()->json(['message' => 'Newsletter en cours d\'envoi !']);
+    }
 }

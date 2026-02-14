@@ -39,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/appointments/{id}', [AppointmentController::class, 'show']);
 
     Route::get('/newsletter', [NewsletterController::class, 'index']);
+    Route::post('/newsletter/send', [NewsletterController::class, 'send']);
 
     // Gestion du Blog (Actions Administrateur)
     Route::post('/blogs', [BlogController::class, 'store']);    // Créer
